@@ -1,0 +1,21 @@
+{
+  "name": "rmt",
+  "description": "restaurant management tool",
+  "main": "gulpfile.js",
+  "authors": [
+    "Alessandro Menduni"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/mendaomn/RMT_v2",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.7"
+  }
+}
