@@ -1,6 +1,7 @@
 (function() {
     var app = angular.module('RMT', ['Services']);
     app.controller('RMTCtrl', ['$scope', 'waiter', function($scope, waiter) {
+        $scope.currentView = 'table-selection';
         var o1 = waiter.createOrder();
         var o2 = waiter.createOrder();
         var food1 = {
