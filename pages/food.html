@@ -1,0 +1,14 @@
+<div class="container" ng-controller="FoodCtrl">
+    <h1>Food!</h1>
+    <div class="row">
+    	<div class="col-xs-12">
+    		<ul class="list-group">
+    		    <li ng-repeat="food in foodList" ng-click="selectSection(section)" class="list-group-item" >
+    		    	<span class="food-name">{{food.name | lowercase}}</span>
+    		    	<span class="food-price label label-primary pull-right">{{food.price + '€'}}</span>
+
+    		    </li>
+    		</ul>
+    	</div>
+    </div>
+</div>
