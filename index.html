@@ -6,12 +6,25 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, 
 initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
     <title>RMT_v2</title>
+    <!-- CSS LIBS -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="dist/styles/styles.min.css">
+    <!-- JS LIBS -->
     <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/papaparse/papaparse.min.js"></script>
+    <!-- JS -->
     <script src="dist/scripts/main.min.js"></script>
 </head>
 
 <body ng-app="RMT" ng-controller="RMTCtrl">
-    <ng-include src="'pages/'+currentView+'.html'"></ng-include>
+    <ng-include src="'pages/'+appstate.currentView+'.html'"></ng-include>
+
+    
+
+	<!-- LIBS NON-BLOCKING -->
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

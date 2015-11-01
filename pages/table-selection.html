@@ -1,3 +1,22 @@
-<div class="container">
-	<h1>Tables!</h1>
+<div class="container" ng-controller="TablesCtrl">
+    <h1>Tables!</h1>
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="list-group">
+                <li ng-repeat="room in rooms" ng-class="{active: appstate.room == room.id}" class="list-group-item">
+                    Room {{room.id}}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="list-group">
+                <li ng-repeat="table in tables" ng-click="selectTable(table)" class="list-group-item">
+                    Table {{table.id}}
+                    <span class="label label-warning pull-right">Busy</span>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

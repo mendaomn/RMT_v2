@@ -5,7 +5,7 @@
     app.factory('waiter', ['orderGenerator', function(orderGenerator) {
         var orders = [];
         return {
-            createOrder: function() {
+            createOrder: function(table) {
                 var newOrder = orderGenerator.createOrder();
                 orders.push(newOrder);
                 return newOrder;
@@ -14,10 +14,11 @@
                 var pos = orders.indexOf(order);
                 orders.splice(pos, 1);
             },
-            sendOrder: function(order){
-            	var content = order.getContent();
-            	console.log("foods: ", order.getCount());
-            	console.log("list of foods: ", content);
+            sendOrder: function(order) {
+                var content = order.getContent();
+                console.log("foods: ", order.getCount());
+                console.log("list of foods: ", content);
+
             }
         };
     }]);
