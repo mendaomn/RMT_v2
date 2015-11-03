@@ -8,7 +8,9 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
     notify = require('gulp-notify'),
-    cache = require('gulp-cache');
+    cache = require('gulp-cache'),
+    connect = require('gulp-connect'),
+    watch = require('gulp-watch');
 
 // Styles
 gulp.task('styles', function() {
@@ -44,9 +46,9 @@ gulp.task('scripts', ['lint'], function() {
 
 // JSHint
 gulp.task('lint', function() {
-  return gulp.src('js/**/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+    return gulp.src('js/**/*.js')
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'));
 });
 
 // Watch
@@ -55,7 +57,21 @@ gulp.task('watch', function() {
     gulp.watch('js/**/*.js', ['scripts']);
 });
 
+// Server
+gulp.task('webserver', function() {
+    connect.server({
+        livereload: true
+    });
+});
+
+// Live Reload
+gulp.task('livereload', function() {
+    gulp.src(['pages/**/*.html', 'index.html', 'css/**/*.css', 'js/**/*.js'])
+        .pipe(watch(['pages/**/*.html', 'index.html', 'css/**/*.css', 'js/**/*.js']))
+        .pipe(connect.reload());
+});
+
 // Default task
-gulp.task('default', function() {
+gulp.task('default', ['webserver', 'livereload'], function() {
     gulp.start('styles', 'scripts', 'watch');
 });
