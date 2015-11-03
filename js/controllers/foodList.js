@@ -7,7 +7,6 @@
 
         $scope.selectSection = function(section) {
             $scope.appstate.section = section;
-            $scope.appstate.currentView = 'foodList';
         };
     }]);
 })();
