@@ -57,5 +57,5 @@ gulp.task('watch', function() {
 
 // Default task
 gulp.task('default', function() {
-    gulp.start('styles', 'scripts');
+    gulp.start('styles', 'scripts', 'watch');
 });
