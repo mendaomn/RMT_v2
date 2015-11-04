@@ -5,8 +5,19 @@
     app.controller('FoodCtrl', ['$scope', 'menu', function($scope, menu) {
         $scope.foodList = menu.getFoodList($scope.appstate.section);
 
-        $scope.selectSection = function(section) {
-            $scope.appstate.section = section;
+        // addFood: function(args) {
+        //             var obj = {
+        //                 food: args.food,
+        //                 quantity: args.quantity,
+        //                 note: args.note || undefined
+        //             };
+
+        $scope.orderFood = function(food) {
+        	console.log(food);
+        	$scope.appstate.order.addFood({
+        		food: food,
+        		quantity: 1
+        	});
         };
     }]);
 })();

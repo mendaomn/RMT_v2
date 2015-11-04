@@ -14,17 +14,18 @@
                     if (viewsHistory.length)
                         this.currentView = viewsHistory.pop();
                 }
-            }
+            };
         })();
     }]);
 
-    app.controller('TablesCtrl', ['$scope', 'restaurant', function($scope, restaurant) {
+    app.controller('TablesCtrl', ['$scope', 'restaurant', 'waiter', function($scope, restaurant, waiter) {
         $scope.selectRoom = function(room) {
             $scope.appstate.room = room;
             $scope.tables = restaurant.getTables(room);
         };
         $scope.selectTable = function(table) {
             $scope.appstate.table = table;
+            $scope.appstate.order = waiter.createOrder();
             $scope.appstate.setView('sections');
         };
         $scope.rooms = restaurant.getRooms();

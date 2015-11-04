@@ -6,7 +6,7 @@
         var Order = function() {
             var table,
                 total = 0,
-                content = [];
+                content = {};
             return {
                 getContent: function() {
                     return {
@@ -18,14 +18,23 @@
                     return content.length;
                 },
                 addFood: function(args) {
-                    var obj = {
-                        food: args.food,
-                        quantity: args.quantity,
-                        note: args.note || undefined
-                    };
-                    content.push(obj);
+                    var qty = this.getQuantity(args.food),
+                        obj = {
+                            food: args.food,
+                            quantity: args.quantity,
+                            note: args.note || undefined
+                        };
+                    if (qty) {
+                        obj.quantity = qty + 1;
+                    }
+
+                    content[args.food.name] = obj;
                     total += args.quantity * args.food.price;
                     // what if there's a note? should it increase the price?
+                },
+                getQuantity: function(food) {
+                    if (content[food.name])
+                        return content[food.name].quantity;
                 }
             };
         };
