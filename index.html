@@ -12,6 +12,7 @@ initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" href="dist/styles/styles.min.css">
     <!-- JS LIBS -->
     <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.min.js"></script>
     <script src="bower_components/papaparse/papaparse.min.js"></script>
     <!-- JS -->
     <script src="dist/scripts/main.min.js"></script>
@@ -19,6 +20,7 @@ initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 
 <body ng-app="RMT" ng-controller="RMTCtrl">
     <button class="btn-back" ng-click="appstate.goBack()">Backy!</button>
+    <button class="btn-order" ng-click="appstate.setView('order')">Ordery!</button>
     <ng-include src="'pages/'+appstate.currentView+'.html'"></ng-include>
 
     

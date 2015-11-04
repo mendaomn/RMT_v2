@@ -1,0 +1,15 @@
+<div class="container" ng-controller="OrderCtrl">
+    <h1>Order!</h1>
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="list-group">
+                <li ng-repeat="item in orderItems" class="list-group-item">
+                    <span class="food-name">{{item.food.name | lowercase}}</span>
+                    <span class="food-quantity badge pull-right">{{item.quantity}}</span>
+                    <div class="food-remove" ng-click="removeFood(item)">Remove</div>
+                </li>
+            </ul>
+            <p class="order-total">Total: {{total + '€'}}</p>
+        </div>
+    </div>
+</div>

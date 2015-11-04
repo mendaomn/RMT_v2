@@ -9,8 +9,11 @@
                 content = {};
             return {
                 getContent: function() {
+                    var contentToArray = $.map(content, function(i) {
+                        return [i];
+                    });
                     return {
-                        content: content,
+                        content: contentToArray,
                         total: total
                     };
                 },
