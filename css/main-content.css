@@ -1,0 +1,32 @@
+.main-content h1 {
+    line-height: 80px;
+    font-size: 24px;
+    width: 100%;
+    background-color: #fff;
+    margin: 0;
+}
+
+.main-content h1 .glyphicon{
+	margin: 0 15px;
+}
+
+.list-group {
+    height: calc(100vh - 80px);
+    padding: 10px 0 15px 10px;
+    overflow-y: auto;
+}
+
+.list-group-item:first-child, .list-group-item:last-child  {
+    border-radius: 0;
+}
+
+.list-group-item:first-child{
+	border-top: none;
+}
+
+.list-group-item {
+    border-left: none;
+    border-right: none;
+    padding: 15px 0;
+    font-size: 18px;
+}

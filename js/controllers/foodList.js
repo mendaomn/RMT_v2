@@ -23,6 +23,6 @@
         $scope.reduceFood = function(food) {
             console.log("Would like to reduce ", food);
             food.name = "left";
-        }
+        };
     }]);
 })();

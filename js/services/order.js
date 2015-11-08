@@ -35,6 +35,10 @@
                     total += args.quantity * args.food.price;
                     // what if there's a note? should it increase the price?
                 },
+                removeItem: function(item){
+                    total -= item.quantity * item.food.price;
+                    delete content[item.food.name];
+                },
                 getQuantity: function(food) {
                     if (content[food.name])
                         return content[food.name].quantity;

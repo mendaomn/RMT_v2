@@ -5,14 +5,19 @@
             var viewsHistory = [];
             return {
                 currentView: 'table-selection',
-                room: {},
+                canGoBack: false,
                 setView: function(view) {
                     viewsHistory.push(this.currentView);
                     this.currentView = view;
+                    this.canGoBack = true;
                 },
                 goBack: function() {
-                    if (viewsHistory.length)
+                    if (viewsHistory.length) {
                         this.currentView = viewsHistory.pop();
+                        if (viewsHistory.length === 0) {
+                            this.canGoBack = false;
+                        }
+                    }
                 }
             };
         })();
@@ -29,6 +34,7 @@
             $scope.appstate.setView('sections');
         };
         $scope.rooms = restaurant.getRooms();
+        $scope.appstate.room = $scope.rooms[0];
         $scope.tables = restaurant.getTables($scope.appstate.room);
     }]);
 })();

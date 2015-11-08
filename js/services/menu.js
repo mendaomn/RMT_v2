@@ -28,7 +28,7 @@
                             } else { // Line contains a food description
                                 var food = {
                                     name: line[0],
-                                    price: line[1]
+                                    price: parseFloat(line[1].replace(/,/,'.'))
                                 };
                                 menu[currSection].push(food);
                             }

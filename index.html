@@ -19,15 +19,31 @@ initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 </head>
 
 <body ng-app="RMT" ng-controller="RMTCtrl">
-    <button class="btn-back" ng-click="appstate.goBack()">Backy!</button>
-    <button class="btn-order" ng-click="appstate.setView('order')">Ordery!</button>
-    <ng-include src="'pages/'+appstate.currentView+'.html'"></ng-include>
-
-    
-
-	<!-- LIBS NON-BLOCKING -->
-	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <div ng-show="false" class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <span ng-show="appstate.canGoBack" class="btn btn-default glyphicon glyphicon-chevron-left" ng-click="appstate.goBack()"></span>
+                <span ng-show="appstate.order" class="btn btn-default pull-right glyphicon glyphicon-list" ng-click="appstate.setView('order')"></span>
+            </div>
+        </div>
+    </div>
+    <nav class="nav-fixed">
+        <div ng-style="{'visibility': appstate.canGoBack?'visible':'hidden'}" class="nav-list-item glyphicon glyphicon-chevron-left" ng-click="appstate.goBack()"></div>
+        <ul class="nav-list">
+            <li class="nav-list-item" ng-click="appstate.setView('order')">
+                <div class="glyphicon glyphicon-list"></div>
+            </li>
+            <li class="nav-list-item" ng-click="appstate.setView('table-selection')">
+                <div class="glyphicon glyphicon-home"></div>
+            </li>
+        </ul>
+    </nav>
+    <div class="main-content">
+        <ng-include src="'pages/'+appstate.currentView+'.html'"></ng-include>
+    </div>
+    <!-- LIBS NON-BLOCKING -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

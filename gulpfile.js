@@ -25,9 +25,9 @@ gulp.task('styles', function() {
         }))
         .pipe(minifycss())
         .pipe(gulp.dest('dist/styles'))
-        .pipe(notify({
-            message: 'Styles task complete'
-        }));
+        // .pipe(notify({
+        //     message: 'Styles task complete'
+        // }));
 });
 
 // Scripts
@@ -39,9 +39,9 @@ gulp.task('scripts', ['lint'], function() {
         }))
         .pipe(uglify())
         .pipe(gulp.dest('dist/scripts'))
-        .pipe(notify({
-            message: 'Scripts task complete'
-        }));
+        // .pipe(notify({
+        //     message: 'Scripts task complete'
+        // }));
 });
 
 // JSHint

@@ -1,22 +1,14 @@
-<div class="container" ng-controller="TablesCtrl">
-    <h1>Tables & Rooms!</h1>
-    <div class="row">
-        <div class="col-xs-12">
-            <ul class="list-group">
-                <li ng-repeat="room in rooms" ng-class="{active: appstate.room == room}" ng-click="selectRoom(room)" class="list-group-item">
-                    Room {{room.id}}
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <ul class="list-group">
-                <li ng-repeat="table in tables" ng-click="selectTable(table)" class="list-group-item">
-                    Table {{table.id}}
-                    <span ng-show="table.busy" class="label label-warning pull-right">Busy</span>
-                </li>
-            </ul>
-        </div>
-    </div>
+<h1><span class="glyphicon glyphicon-home"></span>Home</h1>
+<div ng-controller="TablesCtrl">
+    <ul class="nav nav-tabs">
+        <li ng-repeat="room in rooms" ng-class="{active: appstate.room == room}" ng-click="selectRoom(room)">
+            <a href="#">Room {{room.id}}</a>
+        </li>
+    </ul>
+    <ul class="list-group">
+        <li ng-repeat="table in tables" ng-click="selectTable(table)" class="list-group-item">
+            Table {{table.id}}
+            <span ng-show="table.busy" class="label label-warning pull-right">Busy</span>
+        </li>
+    </ul>
 </div>
