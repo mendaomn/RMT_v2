@@ -19,14 +19,6 @@ initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 </head>
 
 <body ng-app="RMT" ng-controller="RMTCtrl">
-    <div ng-show="false" class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <span ng-show="appstate.canGoBack" class="btn btn-default glyphicon glyphicon-chevron-left" ng-click="appstate.goBack()"></span>
-                <span ng-show="appstate.order" class="btn btn-default pull-right glyphicon glyphicon-list" ng-click="appstate.setView('order')"></span>
-            </div>
-        </div>
-    </div>
     <nav class="nav-fixed">
         <div ng-style="{'visibility': appstate.canGoBack?'visible':'hidden'}" class="nav-list-item glyphicon glyphicon-chevron-left" ng-click="appstate.goBack()"></div>
         <ul class="nav-list">
