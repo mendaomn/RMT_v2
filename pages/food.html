@@ -1,7 +1,8 @@
 <h1><span class="glyphicon glyphicon-user"></span>Menu</h1>
 <ul class="list-group" ng-controller="FoodCtrl">
-    <li ng-repeat="food in foodList | orderBy: 'name'" ng-click="orderFood(food)" ng-swipe-left="food.name='ciao'" class="list-group-item">
+    <li ng-repeat="food in foodList | orderBy: 'name'" ng-click="swiping ? ( swiping = false ):orderFood(food)" ng-swipe-right="reduceFood(food); swiping=true" class="list-group-item">
         <span class="food-name">{{food.name | lowercase}}</span>
-        <span class="food-quantity badge pull-right">{{appstate.order.getQuantity(food)}}</span>
+        <span ng-show="appstate.order.getQuantity(food) !== 0" class="food-quantity badge pull-right">{{appstate.order.getQuantity(food)}}</span>
     </li>
 </ul>
+<!-- ng-click="orderFood(food)" -->

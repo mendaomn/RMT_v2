@@ -13,7 +13,6 @@
         //             };
 
         $scope.orderFood = function(food) {
-            console.log(food);
             $scope.appstate.order.addFood({
                 food: food,
                 quantity: 1
@@ -21,8 +20,7 @@
         };
 
         $scope.reduceFood = function(food) {
-            console.log("Would like to reduce ", food);
-            food.name = "left";
+            $scope.appstate.order.reduceFood(food);
         };
     }]);
 })();
