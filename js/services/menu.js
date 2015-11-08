@@ -4,7 +4,7 @@
     var app = angular.module('Menu', []);
     app.factory('menu', ['$http', function($http) {
         var menu = {},
-            hasParsed = loadFromFile('/assets/menu/menu_parsable.csv');
+            hasParsed = loadFromFile('assets/menu/menu_parsable.csv');
 
         function loadFromFile(file) {
             var that = this;
