@@ -1,6 +1,6 @@
 <h1><span class="glyphicon glyphicon-user"></span>Menu</h1>
 <ul class="list-group" ng-controller="FoodCtrl">
-    <li ng-repeat="food in foodList" ng-click="orderFood(food)" ng-swipe-left="food.name='ciao'" class="list-group-item">
+    <li ng-repeat="food in foodList | orderBy: 'name'" ng-click="orderFood(food)" ng-swipe-left="food.name='ciao'" class="list-group-item">
         <span class="food-name">{{food.name | lowercase}}</span>
         <span class="food-quantity badge pull-right">{{appstate.order.getQuantity(food)}}</span>
     </li>
