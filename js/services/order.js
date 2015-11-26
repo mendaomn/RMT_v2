@@ -3,8 +3,8 @@
 (function() {
     var app = angular.module('Order', []);
     app.factory('orderGenerator', function() {
-        var Order = function() {
-            var table,
+        var Order = function(table) {
+            var table = table,
                 total = 0,
                 content = {};
             return {
@@ -34,6 +34,8 @@
                     content[args.food.name] = obj;
                     total += args.quantity * args.food.price;
                     // what if there's a note? should it increase the price?
+
+                    table.busy = true;
                 },
                 reduceFood: function(food) {
                     var foodExists = content[food.name] ? true : false,
@@ -52,8 +54,8 @@
             };
         };
         return {
-            createOrder: function() {
-                return new Order();
+            createOrder: function(table) {
+                return new Order(table);
             }
         };
     });

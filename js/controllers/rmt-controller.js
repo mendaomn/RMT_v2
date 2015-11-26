@@ -30,7 +30,7 @@
         };
         $scope.selectTable = function(table) {
             $scope.appstate.table = table;
-            $scope.appstate.order = waiter.createOrder();
+            $scope.appstate.order = waiter.createOrder(table);
             $scope.appstate.setView('sections');
         };
         $scope.rooms = restaurant.getRooms();

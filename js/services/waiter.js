@@ -6,7 +6,7 @@
         var orders = [];
         return {
             createOrder: function(table) {
-                var newOrder = orderGenerator.createOrder();
+                var newOrder = orderGenerator.createOrder(table);
                 orders.push(newOrder);
                 return newOrder;
             },
