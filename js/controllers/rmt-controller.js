@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module('RMT', ['Services', 'Controllers', 'ngTouch']);
+    var app = angular.module('RMT', ['Services', 'Controllers', 'Directives', 'ngTouch']);
     app.controller('RMTCtrl', ['$scope', 'waiter', 'menu', function($scope, waiter, menu) {
         $scope.appstate = (function() {
             var viewsHistory = [];
@@ -7,9 +7,11 @@
                 currentView: 'table-selection',
                 canGoBack: false,
                 setView: function(view) {
-                    viewsHistory.push(this.currentView);
-                    this.currentView = view;
-                    this.canGoBack = true;
+                    if (this.currentView !== view) {
+                        viewsHistory.push(this.currentView);
+                        this.currentView = view;
+                        this.canGoBack = true;
+                    }
                 },
                 goBack: function() {
                     if (viewsHistory.length) {

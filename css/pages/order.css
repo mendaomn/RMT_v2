@@ -1,0 +1,14 @@
+.food-remove {
+    position: absolute;
+    top: calc((50px - 35px)/2);
+    right: 0;
+    bottom: 0;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    background: #E74C3C;
+    color: white;
+    font-weight: bold;
+    font-size: 1.4em;
+    border-radius: 50%;
+}

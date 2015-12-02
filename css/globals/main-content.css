@@ -6,8 +6,8 @@
     margin: 0;
 }
 
-.main-content h1 .glyphicon{
-	margin: 0 15px;
+.main-content h1 .glyphicon {
+    margin: 0 15px;
 }
 
 .list-group {
@@ -16,17 +16,20 @@
     overflow-y: auto;
 }
 
-.list-group-item:first-child, .list-group-item:last-child  {
+.list-group-item:first-child,
+.list-group-item:last-child {
     border-radius: 0;
 }
 
-.list-group-item:first-child{
-	border-top: none;
+.list-group-item:first-child {
+    border-top: none;
 }
 
 .list-group-item {
     border-left: none;
     border-right: none;
-    padding: 15px 0;
+    height: 50px;
+    line-height: 50px;
+    padding: 0;
     font-size: 18px;
 }

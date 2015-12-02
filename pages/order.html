@@ -1,11 +1,16 @@
 <div ng-controller="OrderCtrl">
-    <h1><span class="glyphicon glyphicon-list"></span>Order!</h1>
+    <h1 class="flex flex-align-center">
+    	<span class="glyphicon glyphicon-list"></span>
+    	<span class="flex1">Order!</span>
+    	<!-- REMOVE button (becomes DONE button while removing) -->
+		<span class="glyphicon glyphicon-trash" ng-click="removing = true" ng-hide="removing == true"></span>
+		<span class="glyphicon glyphicon-ok" ng-click="removing = false" ng-show="removing == true"></span>
+    </h1>
     <ul class="list-group">
-        <li ng-repeat="item in orderContent.content" class="list-group-item">
-            <span class="food-name">{{item.food.name | lowercase}}</span>
-            <span class="food-quantity badge pull-right">{{item.quantity}}</span>
-            <div class="food-remove" ng-click="removeFood(item)">Remove</div>
+        <li ng-repeat="item in orderContent" class="list-group-item">
+            <food-entry name="item.food.name" quantity="item.quantity" onnote="showNote(item)" onplus="orderFood(item)" onminus="reduceFood(item)"></food-entry>
+            <!-- REMOVE FOOD button, overlays on top of the food's quantity -->
+            <div ng-show="removing == true" class="food-remove flex flex-center" ng-click="removeFood(item)">X</div>
         </li>
     </ul>
-    <p class="order-total">Total: {{orderContent.total + '€'}}</p>
 </div>

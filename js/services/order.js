@@ -9,13 +9,7 @@
                 content = {};
             return {
                 getContent: function() {
-                    var contentToArray = $.map(content, function(i) {
-                        return [i];
-                    });
-                    return {
-                        content: contentToArray,
-                        total: total
-                    };
+                    return content;
                 },
                 getCount: function() {
                     return content.length;

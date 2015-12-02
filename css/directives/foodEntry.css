@@ -1,0 +1,31 @@
+/* foodEntry.css */
+
+.food-entry__backside .glyphicon{
+	font-size: 2em;
+	margin: 0 35px;
+	line-height: 50px;
+	flex: 1;
+}
+
+.food-entry__backside .glyphicon-minus{
+	text-align: right;
+}
+
+.food-entry__quantity {
+    display: inline-block;
+    background: #333333;
+    color: white;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    font-size: 1.4em;
+}
+
+.food-entry__frontside{
+	align-items: center;
+}
+
+.food-entry__name{
+	flex: 1;	
+}
