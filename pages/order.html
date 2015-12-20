@@ -1,16 +1,31 @@
 <div ng-controller="OrderCtrl">
     <h1 class="flex flex-align-center">
-    	<span class="glyphicon glyphicon-list"></span>
-    	<span class="flex1">Order!</span>
-    	<!-- REMOVE button (becomes DONE button while removing) -->
-		<span class="glyphicon glyphicon-trash" ng-click="removing = true" ng-hide="removing == true"></span>
-		<span class="glyphicon glyphicon-ok" ng-click="removing = false" ng-show="removing == true"></span>
+        <span class="glyphicon glyphicon-list"></span>
+        <span class="flex1">Order!</span>
+        <!-- REMOVE button (becomes DONE button while removing) -->
+        <span class="glyphicon glyphicon-trash" ng-click="removing = true" ng-hide="removing == true"></span>
+        <span class="glyphicon glyphicon-ok" ng-click="removing = false" ng-show="removing == true"></span>
     </h1>
-    <ul class="list-group">
+    <!-- ORDER ITEMS -->
+    <ul ng-hide="note.visible" class="list-group">
         <li ng-repeat="item in orderContent" class="list-group-item">
             <food-entry name="item.food.name" quantity="item.quantity" onnote="showNote(item)" onplus="orderFood(item)" onminus="reduceFood(item)"></food-entry>
             <!-- REMOVE FOOD button, overlays on top of the food's quantity -->
             <div ng-show="removing == true" class="food-remove flex flex-center" ng-click="removeFood(item)">X</div>
+        </li>
+    </ul>
+    <!-- NOTE TAKER -->
+    <ul ng-show="note.visible" class="list-group">
+        <li class="list-group-item">
+            <food-entry name="note.item.food.name" quantity="note.item.quantity" onplus="orderFood(item)" onminus="reduceFood(item)"></food-entry>
+        </li>
+        <li class="list-group-item">
+            <!-- SOME SORT OF BOOTSTRAP COOL TEXTAREA THING 
+            <form action="">
+                <label for="">Take a note:</label>
+                <input type="text">
+                <button>Submit</button>
+            </form> -->
         </li>
     </ul>
 </div>
