@@ -38,8 +38,27 @@
 
         // Save note content to the order's item
         // It should do more
-        $scope.saveNote = function(){
-            $scope.note.item.note = $scope.note.text;
+        $scope.saveNote = function() {
+            var orderItem = $scope.note.item;
+            // Modify existing note
+            if (orderItem.note) {
+                orderItem.note = $scope.note.text;
+            } else {
+                // Separate noted item from non-noted ones
+                $scope.appstate.order.reduceFood(orderItem.food);
+                if (orderItem.quantity === 0){
+                    $scope.removeFood(orderItem);
+                }
+                $scope.appstate.order.addFood({
+                    food: orderItem.food,
+                    quantity: 1,
+                    note: $scope.note.text
+                });
+            }
+            // Exit note-taking mode
+            $scope.note.visible = false;
+            // debugging purpose
+            console.log($scope.appstate.order.getContent());
         };
 
     }]);

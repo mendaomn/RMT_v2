@@ -15,17 +15,24 @@
                     return content.length;
                 },
                 addFood: function(args) {
-                    var qty = this.getQuantity(args.food),
-                        obj = {
-                            food: args.food,
-                            quantity: args.quantity,
-                            note: args.note || undefined
-                        };
-                    if (qty) {
-                        obj.quantity = qty + 1;
+                    var qty;
+                    var obj = {
+                        food: args.food,
+                        quantity: args.quantity,
+                        note: args.note || undefined
+                    };
+
+                    if (!obj.note) {
+                        qty = this.getQuantity(args.food);
+
+                        if (qty) {
+                            obj.quantity = qty + 1;
+                        }
+                        content[args.food.name] = obj;
+                    } else {
+                        content[args.food.name + args.note] = obj;
                     }
 
-                    content[args.food.name] = obj;
                     total += args.quantity * args.food.price;
                     // what if there's a note? should it increase the price?
 
