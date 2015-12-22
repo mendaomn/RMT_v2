@@ -3,8 +3,8 @@
 (function() {
     var app = angular.module('Order', []);
     app.factory('orderGenerator', function() {
-        var Order = function(table) {
-            var table = table,
+        var Order = function(_table) {
+            var table = _table,
                 total = 0,
                 content = {};
             return {

@@ -17,7 +17,8 @@
                             var i, len = line.length;
                             // Do something weird
                             for (i = 0; i < len; i++)
-                                line[i] && line.push(line[i]);
+                                if (line[i])
+                                    line.push(line[i]);
                             line.splice(0, len);
                             if (line.length === 0) { // Line is not empty
                                 return;
@@ -28,7 +29,7 @@
                             } else { // Line contains a food description
                                 var food = {
                                     name: line[0],
-                                    price: parseFloat(line[1].replace(/,/,'.'))
+                                    price: parseFloat(line[1].replace(/,/, '.'))
                                 };
                                 menu[currSection].push(food);
                             }
