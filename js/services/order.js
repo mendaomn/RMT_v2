@@ -5,52 +5,88 @@
     app.factory('orderGenerator', function() {
         var Order = function(_table) {
             var table = _table,
-                total = 0,
-                content = {};
+                content = [];
+
+            function isFoodInOrder(food) {
+                var foodNamesList = content.map(getter("food")).map(getter("name"));
+                console.log(foodNamesList);
+                return foodNamesList.indexOf(food.name) != -1;
+            }
+
+
+
+            function getter(name) {
+                return function(obj) {
+                    return obj[name];
+                };
+            }
+
             return {
                 getContent: function() {
                     return content;
                 },
+                getTotal: function() {
+                    return content.reduce(function(cumulator, item) {
+                        cumulator += (item.quantity * item.food.price);
+                        return cumulator;
+                    }, 0);
+                },
                 getCount: function() {
                     return content.length;
                 },
-                addFood: function(args) {
-                    var qty;
-                    var obj = {
-                        food: args.food,
-                        quantity: args.quantity,
-                        note: args.note || undefined
-                    };
-
-                    if (!obj.note) {
-                        qty = this.getQuantity(args.food);
-
-                        if (qty) {
-                            obj.quantity = qty + 1;
-                        }
-                        content[args.food.name] = obj;
+                addFood: function(args) { // args: food, quantity, note
+                    var orderItem = this.getItem(args);
+                    if (!orderItem) {
+                        content.push({
+                            food: args.food,
+                            quantity: args.quantity,
+                            note: args.note || undefined
+                        });
                     } else {
-                        content[args.food.name + args.note] = obj;
+                        orderItem.quantity += args.quantity;
                     }
-
-                    total += args.quantity * args.food.price;
-                    // what if there's a note? should it increase the price?
 
                     table.busy = true;
                 },
-                reduceFood: function(food) {
-                    var foodExists = content[food.name] ? true : false,
-                        qty = content[food.name].quantity;
-                    if (foodExists && qty !== 0)
-                        content[food.name].quantity -= 1;
+                addNote: function(item, note) {
+                    if (item.note && item.note != note) {
+                        item.note = note;
+                    } else if (!item.note) {
+                        this.reduceQuantity(item);
+                        if (item.quantity === 0)
+                            this.removeItem(item);
+                        this.addFood({
+                            food: item.food,
+                            quantity: 1,
+                            note: note
+                        });
+                    }
+
+                },
+                reduceQuantity: function(item) {
+                    if (item.quantity !== 0) {
+                        item.quantity -= 1;
+                    }
+                },
+                getItem: function(args) { // args: food, quantity, note
+                    var item = content.find(function(_item) {
+                        var sameFood = (_item.food.name == args.food.name);
+                        var sameNote = (_item.note == args.note);
+                        if (!args.note && !_item.note)
+                            return sameFood;
+                        else 
+                            return sameFood && sameNote;
+                    });
+                    return item;
                 },
                 removeItem: function(item) {
-                    total -= item.quantity * item.food.price;
-                    delete content[item.food.name];
+                    content.splice(content.indexOf(item), 1);
                 },
                 getQuantity: function(food) {
-                    if (content[food.name])
-                        return content[food.name].quantity;
+                    var _item = this.getItem({
+                        food: food
+                    });
+                    return (_item) ? _item.quantity : 0;
                 }
             };
         };

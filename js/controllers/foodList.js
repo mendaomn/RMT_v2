@@ -20,7 +20,11 @@
         };
 
         $scope.reduceFood = function(food) {
-            $scope.appstate.order.reduceFood(food);
+            var orderItem = $scope.appstate.order.getItem({
+                food: food
+            });
+
+            $scope.appstate.order.reduceQuantity(orderItem);
         };
     }]);
 })();

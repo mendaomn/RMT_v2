@@ -10,6 +10,7 @@
             scope: {
                 name: '=',
                 quantity: '=',
+                note: '=',
                 onplus: '&',
                 onminus: '&',
                 onnote: '&?'

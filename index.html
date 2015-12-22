@@ -16,6 +16,7 @@ initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
     <script src="bower_components/papaparse/papaparse.min.js"></script>
     <!-- JS -->
     <script src="dist/scripts/main.min.js"></script>
+    <script src="dist/scripts/templates.min.js"></script>
 </head>
 
 <body ng-app="RMT" ng-controller="RMTCtrl">
@@ -40,7 +41,7 @@ initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
     </nav>
     <div class="main-content">
         <ng-include src="'pages/'+appstate.currentView+'.html'"></ng-include>
-    </div>
+    </div> 
     <!-- LIBS NON-BLOCKING -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

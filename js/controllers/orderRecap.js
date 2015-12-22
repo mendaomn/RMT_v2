@@ -22,7 +22,7 @@
 
         // Handler: reduces by 1 from item's quantity
         $scope.reduceFood = function(orderItem) {
-            $scope.appstate.order.reduceFood(orderItem.food);
+            $scope.appstate.order.reduceQuantity(orderItem);
         };
 
         // Handler: shows note taker or something
@@ -38,25 +38,11 @@
 
         // Save note content to the order's item
         // It should do more
-        $scope.saveNote = function() {
-            var orderItem = $scope.note.item;
-            // Modify existing note
-            if (orderItem.note) {
-                orderItem.note = $scope.note.text;
-            } else {
-                // Separate noted item from non-noted ones
-                $scope.appstate.order.reduceFood(orderItem.food);
-                if (orderItem.quantity === 0){
-                    $scope.removeFood(orderItem);
-                }
-                $scope.appstate.order.addFood({
-                    food: orderItem.food,
-                    quantity: 1,
-                    note: $scope.note.text
-                });
-            }
-            // Exit note-taking mode
-            $scope.note.visible = false;
+        $scope.saveNote = function(note) {
+            console.log(note);
+            // Add note to order's item
+            $scope.appstate.order.addNote(note.item, note.text);
+
             // debugging purpose
             console.log($scope.appstate.order.getContent());
         };

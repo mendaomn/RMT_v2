@@ -1,14 +1,27 @@
 .food-remove {
     position: absolute;
-    top: calc((50px - 35px)/2);
+    top: 0px;
     right: 0;
     bottom: 0;
-    width: 35px;
-    height: 35px;
+    min-width: 70px;
     text-align: center;
     background: #E74C3C;
-    color: white;
-    font-weight: bold;
+    color: #fff;
+    font-weight: 700;
     font-size: 1.4em;
-    border-radius: 50%;
+    padding: 0 5px;
+}
+
+.save-note {
+    position: absolute;
+    top: 0px;
+    right: 0;
+    bottom: 0;
+    min-width: 70px;
+    text-align: center;
+    background: #333333;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.4em;
+    padding: 0 5px;
 }

@@ -9,7 +9,7 @@
     <!-- ORDER ITEMS -->
     <ul ng-hide="note.visible" class="list-group">
         <li ng-repeat="item in orderContent" class="list-group-item">
-            <food-entry name="item.food.name" quantity="item.quantity" onnote="showNote(item)" onplus="orderFood(item)" onminus="reduceFood(item)"></food-entry>
+            <food-entry name="item.food.name" quantity="item.quantity" note="item.note" onnote="showNote(item)" onplus="orderFood(item)" onminus="reduceFood(item)"></food-entry>
             <!-- REMOVE FOOD button, overlays on top of the food's quantity -->
             <div ng-show="removing == true" class="food-remove flex flex-center" ng-click="removeFood(item)">X</div>
         </li>
@@ -17,9 +17,9 @@
     <!-- NOTE TAKER -->
     <ul ng-show="note.visible" class="list-group">
         <li class="list-group-item">
-            <food-entry name="note.item.food.name" quantity="note.item.quantity" onplus="orderFood(item)" onminus="reduceFood(item)"></food-entry>
+            <food-entry name="note.item.food.name" quantity="note.item.quantity" note="item.note" onplus="orderFood(item)" onminus="reduceFood(item)"></food-entry>
             <!-- SAVE NOTE button, overlays food's quantity -->
-            <div class="food-remove flex flex-center" ng-click="saveNote()">save</div>
+            <div class="save-note flex flex-center" ng-click="note.visible = false; saveNote(note)">Save</div>
         </li>
         <p>Take a note:</p>
         <textarea cols="30" rows="10" ng-model="note.text"></textarea>

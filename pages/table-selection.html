@@ -6,7 +6,7 @@
         </li>
     </ul>
     <ul class="list-group">
-        <li ng-repeat="table in tables" ng-click="selectTable(table)" class="list-group-item">
+        <li ng-repeat="table in tables" ng-click="selectTable(table)" class="list-group-item flex flex-align-center">
             Table {{table.id}}
             <span ng-show="table.busy" class="label label-warning pull-right">Busy</span>
         </li>

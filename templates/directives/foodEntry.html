@@ -1,13 +1,16 @@
 <div class="food-entry__container" ng-mouseleave="showMiddleStep = false; showQuantity = false">
     <!-- NAME and QUANTITY -->
     <div class="food-entry__frontside flex" ng-click="clicked()" ng-hide="showMiddleStep || showQuantity">
-        <span class="food-entry__name">{{name | lowercase}}</span>
+        <div class="food-entry__info">
+            <span class="food-entry__name">{{name | lowercase}}</span>
+            <span class="food-entry__note">{{note | lowercase | limitTo:10}}</span>
+        </div>
         <span class="food-entry__quantity flex flex-center" ng-show="quantity">{{quantity}}</span>
     </div>
     <!-- NOTE | QUANTITY selector (optional) -->
-    <div class="food-entry__middlestep flex" ng-show="showMiddleStep">
-        <div class="food-entry__note-btn flex1" ng-click="onnote(); showMiddleStep = false">NOTE</div>
-        <div class="food-entry__quantity-btn flex1" ng-click="showQuantity = true; showMiddleStep = false">QTY</div>
+    <div class="food-entry__middlestep flex flex-center" ng-show="showMiddleStep">
+        <div class="food-entry__btn flex1" ng-click="onnote(); showMiddleStep = false">NOTE</div>
+        <div class="food-entry__btn food-entry__btn--qty flex1" ng-click="showQuantity = true; showMiddleStep = false">QTY</div>
     </div>
     <!-- QUANTITY plus/minus -->
     <div class="food-entry__backside flex flex-center" ng-show="showQuantity">
