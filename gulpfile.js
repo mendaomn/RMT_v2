@@ -9,6 +9,8 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
+    templates = require('gulp-angular-templatecache'),
+    minifyHTML = require('gulp-minify-html'),
     connect = require('gulp-connect'),
     watch = require('gulp-watch');
 
@@ -44,6 +46,25 @@ gulp.task('scripts', ['lint'], function() {
         // }));
 });
 
+// Templates
+gulp.task('templates', function() {
+    gulp.src([
+            'templates/**/*.html',
+            'pages/**/*.html'
+        ])
+        .pipe(minifyHTML({
+            quotes: true
+        }))
+        .pipe(templates('templates.js', {
+            standalone: true
+        }))
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/scripts'));
+});
+
 // JSHint
 gulp.task('lint', function() {
     return gulp.src('js/**/*.js')
@@ -55,23 +76,28 @@ gulp.task('lint', function() {
 gulp.task('watch', function() {
     gulp.watch('css/**/*.css', ['styles']);
     gulp.watch('js/**/*.js', ['scripts']);
+    gulp.watch([
+        'templates/**/*.html',
+        'pages/**/*.html'
+    ], ['templates']);
 });
 
 // Server
 gulp.task('webserver', function() {
     connect.server({
+        port: 7070,
         livereload: true
     });
 });
 
 // Live Reload
 gulp.task('livereload', function() {
-    gulp.src(['pages/**/*.html', 'index.html', 'css/**/*.css', 'js/**/*.js'])
-        .pipe(watch(['pages/**/*.html', 'index.html', 'css/**/*.css', 'js/**/*.js']))
+    gulp.src(['dist/**/*'])
+        .pipe(watch(['dist/**/*']))
         .pipe(connect.reload());
 });
 
 // Default task
 gulp.task('default', ['webserver', 'livereload'], function() {
-    gulp.start('styles', 'scripts', 'watch');
+    gulp.start('styles', 'scripts', 'templates', 'watch');
 });
