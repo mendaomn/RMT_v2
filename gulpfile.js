@@ -12,7 +12,9 @@ var gulp = require('gulp'),
     templates = require('gulp-angular-templatecache'),
     minifyHTML = require('gulp-minify-html'),
     connect = require('gulp-connect'),
-    watch = require('gulp-watch');
+    watch = require('gulp-watch'),
+    del = require('del'),
+    runSequence = require('run-sequence');
 
 // Styles
 gulp.task('styles', function() {
@@ -85,6 +87,7 @@ gulp.task('watch', function() {
 // Server
 gulp.task('webserver', function() {
     connect.server({
+        root: 'dist',
         port: 7070,
         livereload: true
     });
@@ -97,7 +100,24 @@ gulp.task('livereload', function() {
         .pipe(connect.reload());
 });
 
+// Copy all needed files at the root level (dist)
+gulp.task('copy', function() {
+    gulp.src('index.html')
+        .pipe(gulp.dest('dist/'));
+
+    gulp.src('assets/**/*')
+        .pipe(gulp.dest('dist/assets'));
+
+    gulp.src('bower_components/**/*')
+        .pipe(gulp.dest('dist/bower_components'));
+});
+
+// Clean output directory
+gulp.task('clean', function() {
+    return del('dist');
+});
+
 // Default task
-gulp.task('default', ['webserver', 'livereload'], function() {
-    gulp.start('styles', 'scripts', 'templates', 'watch');
+gulp.task('default', ['clean'], function(cb) {
+    runSequence(['copy', 'watch'], ['styles', 'scripts', 'templates'], ['webserver', 'livereload'], cb);
 });
