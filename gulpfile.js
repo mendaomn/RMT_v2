@@ -102,7 +102,7 @@ gulp.task('livereload', function() {
 
 // Copy all needed files at the root level (dist)
 gulp.task('copy', function() {
-    gulp.src('index.html')
+    gulp.src(['index.html', 'manifest.json', 'sw.js', 'cache-polyfill.js'])
         .pipe(gulp.dest('dist/'));
 
     gulp.src('assets/**/*')
