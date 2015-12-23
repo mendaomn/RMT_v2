@@ -39,7 +39,7 @@ gulp.task('uncss', function () {
         .pipe(uncss({
             html: ['index.html']
         }))
-        .pipe(gulp.dest('./out'));
+        .pipe(gulp.dest('dist/bower_components'));
 });
 
 // Scripts

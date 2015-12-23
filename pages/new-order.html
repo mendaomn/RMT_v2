@@ -1,0 +1,18 @@
+<div ng-controller="NewOrderCtrl">
+    <h1 class="flex flex-align-center">
+	    <span class="glyphicon glyphicon-home"></span>
+	    <span class="flex1">Nuovo ordine</span>
+	    <!-- DONE button -->
+	    <span class="glyphicon glyphicon-ok" ng-click="confirmTables(neworder)"></span>
+	</h1>
+    <ul class="nav nav-tabs">
+        <li ng-repeat="room in rooms" ng-class="{active: neworder.room == room}" ng-click="neworder.room = room">
+            <a href="#">Room {{room.id}}</a>
+        </li>
+    </ul>
+    <ul class="list-group">
+        <li ng-repeat="table in tables" ng-click="neworder.selectTable(table)" ng-class="{'selected': neworder.isSelected(table)}" class="list-group-item flex flex-align-center">
+            Table {{table.id}}
+        </li>
+    </ul>
+</div>

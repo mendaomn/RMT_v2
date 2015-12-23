@@ -1,4 +1,4 @@
-<h1><span class="glyphicon glyphicon-home"></span>Home</h1>
+<h1><span class="glyphicon glyphicon-home"></span>Home: ordini attivi</h1>
 <div ng-controller="TablesCtrl">
     <ul class="nav nav-tabs">
         <li ng-repeat="room in rooms" ng-class="{active: appstate.room == room}" ng-click="selectRoom(room)">
@@ -6,9 +6,8 @@
         </li>
     </ul>
     <ul class="list-group">
-        <li ng-repeat="table in tables" ng-click="selectTable(table)" class="list-group-item flex flex-align-center">
+        <li ng-repeat="table in tables | filter:{busy: true}" ng-click="selectTable(table)" class="list-group-item flex flex-align-center">
             Table {{table.id}}
-            <span ng-show="table.busy" class="label label-warning pull-right">Busy</span>
         </li>
     </ul>
 </div>

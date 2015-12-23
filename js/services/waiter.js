@@ -1,24 +1,48 @@
 // Waiter.js
 // waiter.js - creates, modifies and deletes orders
 (function() {
-    var app = angular.module('Waiter', ['Order']);
-    app.factory('waiter', ['orderGenerator', function(orderGenerator) {
+    var app = angular.module('Waiter', ['Order', 'RmtAPI']);
+    app.factory('waiter', ['orderGenerator', 'rmtAPI', function(orderGenerator, rmtAPI) {
         var orders = [];
+
+        function getter(name) {
+            return function(obj) {
+                return obj[name];
+            };
+        }
+
+        function deleteOrder(order) {
+            var pos = orders.indexOf(order);
+            orders.splice(pos, 1);
+        }
+
         return {
-            createOrder: function(table) {
-                var newOrder = orderGenerator.createOrder(table);
+            createOrder: function(tablesArray) {
+                var newOrder = orderGenerator.createOrder(tablesArray);
+                // Delete old orders and free their tables
+                tablesArray.forEach(function(table) {
+                    var order = this.getOrder(table);
+                    if (order) {
+                        order.tablesArray.forEach(function(_table) {
+                            _table.busy = false;
+                        });
+                        deleteOrder(order);
+                    }
+                    table.busy = true;
+                }.bind(this));
                 orders.push(newOrder);
                 return newOrder;
             },
-            deleteOrder: function(order) {
-                var pos = orders.indexOf(order);
-                orders.splice(pos, 1);
+            getOrder: function(table) {
+                return orders.find(function(order) {
+                    return order.tablesArray.indexOf(table) != -1;
+                });
             },
             sendOrder: function(order) {
                 var content = order.getContent();
                 console.log("foods: ", order.getCount());
                 console.log("list of foods: ", content);
-
+                rmtAPI.sendOrder(order).then(function() {});
             }
         };
     }]);

@@ -3,8 +3,8 @@
 (function() {
     var app = angular.module('Order', []);
     app.factory('orderGenerator', function() {
-        var Order = function(_table) {
-            var table = _table,
+        var Order = function(_tablesArray) {
+            var tablesArray = _tablesArray,
                 content = [];
 
             function isFoodInOrder(food) {
@@ -22,6 +22,7 @@
             }
 
             return {
+                tablesArray: _tablesArray,
                 getContent: function() {
                     return content;
                 },
@@ -45,8 +46,6 @@
                     } else {
                         orderItem.quantity += args.quantity;
                     }
-
-                    table.busy = true;
                 },
                 addNote: function(item, note) {
                     if (item.note && item.note != note) {
@@ -91,8 +90,8 @@
             };
         };
         return {
-            createOrder: function(table) {
-                return new Order(table);
+            createOrder: function(tablesArray) {
+                return new Order(tablesArray);
             }
         };
     });
