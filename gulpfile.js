@@ -3,6 +3,7 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     concatcss = require('gulp-concat-css'),
     minifycss = require('gulp-minify-css'),
+    uncss = require('gulp-uncss'),
     jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
@@ -14,7 +15,8 @@ var gulp = require('gulp'),
     connect = require('gulp-connect'),
     watch = require('gulp-watch'),
     del = require('del'),
-    runSequence = require('run-sequence');
+    runSequence = require('run-sequence'),
+    ghPages = require('gulp-gh-pages');
 
 // Styles
 gulp.task('styles', function() {
@@ -29,9 +31,15 @@ gulp.task('styles', function() {
         }))
         .pipe(minifycss())
         .pipe(gulp.dest('dist/styles'))
-        // .pipe(notify({
-        //     message: 'Styles task complete'
-        // }));
+});
+
+// Uncss
+gulp.task('uncss', function () {
+    return gulp.src('bower_components/**/*.css')
+        .pipe(uncss({
+            html: ['index.html']
+        }))
+        .pipe(gulp.dest('./out'));
 });
 
 // Scripts
@@ -43,9 +51,6 @@ gulp.task('scripts', ['lint'], function() {
         }))
         .pipe(uglify())
         .pipe(gulp.dest('dist/scripts'))
-        // .pipe(notify({
-        //     message: 'Scripts task complete'
-        // }));
 });
 
 // Templates
@@ -115,6 +120,12 @@ gulp.task('copy', function() {
 // Clean output directory
 gulp.task('clean', function() {
     return del('dist');
+});
+
+// Deploy to gh-pages
+gulp.task('deploy', function() {
+    return gulp.src('./dist/**/*')
+        .pipe(ghPages());
 });
 
 // Default task
