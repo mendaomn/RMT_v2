@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module('RMT', ['Services', 'Controllers', 'Directives', 'ngTouch']);
+    var app = angular.module('RMT', ['Services', 'Controllers', 'Directives', 'templates', 'ngTouch']);
     app.controller('RMTCtrl', ['$scope', 'waiter', 'menu', function($scope, waiter, menu) {
         $scope.appstate = (function() {
             var viewsHistory = [];

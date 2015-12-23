@@ -15,7 +15,7 @@
                 onminus: '&',
                 onnote: '&?'
             },
-            templateUrl: 'templates/directives/foodEntry.html',
+            templateUrl: 'directives/foodEntry.html',
             link: function(scope, elem, attrs) {
                 scope.$watch('showQuantity', function(val) {
                     if (val && !scope.quantity)
