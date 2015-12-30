@@ -32,13 +32,27 @@
         $scope.confirmTables = confirmTables;
 
         // Listeners
-        $scope.$watch('neworder.room', function(room) {
-            $scope.tables = restaurant.getTables(room);
-        });
+        $scope.$watch('neworder.room', setTables);
 
         // Init
-        $scope.rooms = restaurant.getRooms();
-        $scope.neworder.room = $scope.rooms[0];
-        $scope.tables = restaurant.getTables($scope.neworder.room);
+        restaurant.getRooms().then(function(rooms) {
+            $scope.rooms = rooms;
+            $scope.neworder.room = $scope.rooms[0];
+            setTables($scope.neworder.room);
+        });
+
+        // utils
+        function assigner(obj) {
+            return function(data) {
+                obj = data;
+            };
+        }
+
+        function setTables(room) {
+            restaurant.getTables(room).then(function(tables) {
+                $scope.tables = tables;
+            });
+        }
+
     }]);
 })();

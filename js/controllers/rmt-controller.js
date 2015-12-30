@@ -26,17 +26,40 @@
     }]);
 
     app.controller('TablesCtrl', ['$scope', 'restaurant', 'waiter', function($scope, restaurant, waiter) {
+        function setTables(room) {
+            restaurant.getTables(room).then(function(tables) {
+                $scope.tables = tables;
+            });
+        }
+
+        restaurant.getRooms().then(function(rooms) {
+            $scope.rooms = rooms;
+            $scope.appstate.room = rooms[0];
+            setTables($scope.appstate.room);
+        });
+
+        // Handlers
         $scope.selectRoom = function(room) {
             $scope.appstate.room = room;
-            $scope.tables = restaurant.getTables(room);
+            setTables($scope.appstate.room);
         };
+
         $scope.selectTable = function(table) {
             $scope.appstate.table = table;
             $scope.appstate.order = waiter.getOrder(table);
             $scope.appstate.setView('sections');
         };
-        $scope.rooms = restaurant.getRooms();
-        $scope.appstate.room = $scope.rooms[0];
-        $scope.tables = restaurant.getTables($scope.appstate.room);
+
+        $scope.activeOrdersCount = function() {
+            if ($scope.tables && $scope.tables.length)
+                return $scope.tables.filter(getter("busy")).length;
+        };
+
+        // utils
+        function getter(name) {
+            return function(obj) {
+                return obj[name];
+            };
+        }
     }]);
 })();

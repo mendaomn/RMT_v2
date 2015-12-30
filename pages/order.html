@@ -26,6 +26,10 @@
             <textarea ng-value="note.text" ng-model="note.text"></textarea>
         </div>
     </ul>
-    <button class="rmt-button" ng-hide="note.visible" ng-click="sendToKitchen(appstate.order)">Send to kitchen</button>
+    <div class="flex">
+        <button class="rmt-button flex1" ng-hide="note.visible" ng-click="sendToKitchen(appstate.order)">Invia</button>
+        <vr style="width: 1px"></vr>   
+        <button class="rmt-button flex1" ng-hide="note.visible" ng-click="sendInvoice(appstate.order)">Conto</button>
+    </div>
 </div>
 

@@ -43,6 +43,11 @@
             waiter.sendOrder(order);
         };
 
+        // Handler: send invoice to cashier
+        $scope.sendInvoice = function(order){
+            waiter.sendInvoice(order);
+        };
+
         // Save note content to the order's item
         // It should do more
         $scope.saveNote = function(note) {

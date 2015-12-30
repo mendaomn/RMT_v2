@@ -6,18 +6,18 @@
         var rooms = [];
         var count = 0;
 
-        $http.get('/assets/restaurant/rooms.json').then(function(data) {
+        var isReady = $http.get('/assets/restaurant/rooms.json').then(function(data) {
             initRooms(data.data);
         });
 
         function initRooms(roomsArray) {
             console.log(roomsArray);
-            roomsArray.forEach(function(room, roomIndex){
+            roomsArray.forEach(function(room, roomIndex) {
                 var obj = {
                     id: roomIndex,
                     tables: []
                 };
-                for (var i = 0; i < room.tables; i++){
+                for (var i = 0; i < room.tables; i++) {
                     obj.tables.push({
                         id: i
                     });
@@ -30,13 +30,16 @@
 
         return {
             getRooms: function() {
-                return rooms;
+                return isReady.then(function() {
+                    return rooms;
+                });
             },
             getTables: function(room) {
-                console.log("Getting tables for room", room);
-                var pos = rooms.indexOf(room);
-                if (pos != -1)
-                    return rooms[pos].tables;
+                return isReady.then(function() {
+                    var pos = rooms.indexOf(room);
+                    if (pos != -1)
+                        return rooms[pos].tables;
+                });
             }
         };
         // room = {
