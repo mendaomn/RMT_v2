@@ -39,10 +39,14 @@
                 });
             },
             sendOrder: function(order) {
-                var content = order.getContent();
-                console.log("foods: ", order.getCount());
-                console.log("list of foods: ", content);
-                rmtAPI.sendOrder(order).then(function() {});
+                var payload = {
+                    table: order.tablesArray.map(function(table) {
+                        return table.id;
+                    }).join(' + '),
+                    order: order.getContent()
+                };
+                console.log("Sending", payload);
+                rmtAPI.sendOrder(payload).then(function() {});
             }
         };
     }]);

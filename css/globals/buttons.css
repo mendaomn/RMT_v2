@@ -1,0 +1,14 @@
+.rmt-button {
+    border: 1px solid #333;
+    outline: none;
+    padding: 10px 15px;
+    background-color: #333333;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.rmt-button:hover {
+    background-color: white;
+    color: #333;
+}

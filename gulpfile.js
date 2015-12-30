@@ -34,7 +34,7 @@ gulp.task('styles', function() {
 });
 
 // Uncss
-gulp.task('uncss', function () {
+gulp.task('uncss', function() {
     return gulp.src('bower_components/**/*.css')
         .pipe(uncss({
             html: ['index.html']
@@ -123,9 +123,15 @@ gulp.task('clean', function() {
 });
 
 // Deploy to gh-pages
-gulp.task('deploy', function() {
+gulp.task('ghpages', function() {
     return gulp.src('./dist/**/*')
         .pipe(ghPages());
+});
+
+// Deploy to rmt_server
+gulp.task('deploy', function() {
+    return gulp.src('./dist/**/*')
+        .pipe(gulp.dest('../RMT_server/public'));
 });
 
 // Default task

@@ -1,4 +1,4 @@
-<div ng-controller="OrderCtrl">
+<div class="flex flex-vertical stretch" ng-controller="OrderCtrl">
     <h1 class="flex flex-align-center">
         <span class="glyphicon glyphicon-list"></span>
         <span class="flex1">Order!</span>
@@ -7,7 +7,7 @@
         <span class="glyphicon glyphicon-ok" ng-click="removing = false" ng-show="removing == true"></span>
     </h1>
     <!-- ORDER ITEMS -->
-    <ul ng-hide="note.visible" class="list-group">
+    <ul ng-hide="note.visible" class="list-group flex1">
         <li ng-repeat="item in orderContent" class="list-group-item">
             <food-entry name="item.food.name" quantity="item.quantity" note="item.note" onnote="showNote(item)" onplus="orderFood(item)" onminus="reduceFood(item)"></food-entry>
             <!-- REMOVE FOOD button, overlays on top of the food's quantity -->
@@ -15,14 +15,17 @@
         </li>
     </ul>
     <!-- NOTE TAKER -->
-    <ul ng-show="note.visible" class="list-group">
+    <ul ng-show="note.visible" class="list-group flex1">
         <li class="list-group-item">
             <food-entry name="note.item.food.name" quantity="note.item.quantity" note="item.note" onplus="orderFood(item)" onminus="reduceFood(item)"></food-entry>
             <!-- SAVE NOTE button, overlays food's quantity -->
             <div class="save-note flex flex-center" ng-click="note.visible = false; saveNote(note)">Save</div>
         </li>
-        <p>Take a note:</p>
-        <textarea cols="30" rows="10" ng-model="note.text"></textarea>
+        <div class="note-container flex flex-center flex-vertical">
+            <span class="note__label">Take a note:</span>
+            <textarea ng-value="note.text" ng-model="note.text"></textarea>
+        </div>
     </ul>
-    <button>Send to kitchen</button>
+    <button class="rmt-button" ng-hide="note.visible" ng-click="sendToKitchen(appstate.order)">Send to kitchen</button>
 </div>
+

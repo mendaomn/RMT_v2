@@ -2,7 +2,7 @@
 
 (function() {
     var app = angular.module('OrderRecap', ['Services']);
-    app.controller('OrderCtrl', ['$scope', function($scope) {
+    app.controller('OrderCtrl', ['$scope', 'waiter', function($scope, waiter) {
         // Init $scope to hold the current order
         $scope.orderContent = $scope.appstate.order.getContent();
 
@@ -16,7 +16,8 @@
         $scope.orderFood = function(orderItem) {
             $scope.appstate.order.addFood({
                 food: orderItem.food,
-                quantity: 1
+                quantity: 1,
+                note: orderItem.note
             });
         };
 
@@ -30,10 +31,16 @@
             // Create the note's environment in the $scope  
             $scope.note = {
                 visible: true,
-                item: orderItem
+                item: orderItem,
+                text: orderItem.note
             };
 
             console.log("Please add note :D", orderItem.food.name, orderItem.quantity);
+        };
+
+        // Handler: send to Kitchen
+        $scope.sendToKitchen = function(order){
+            waiter.sendOrder(order);
         };
 
         // Save note content to the order's item

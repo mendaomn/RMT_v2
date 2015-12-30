@@ -43,7 +43,7 @@ initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
             <li class="nav-list-item" ng-show="appstate.currentView == 'table-selection'" ng-click="appstate.setView('new-order')">
                 <div class="glyphicon glyphicon-plus"></div>
             </li>
-            <li class="nav-list-item" ng-click="appstate.setView('order')">
+            <li class="nav-list-item" ng-show="appstate.order" ng-click="appstate.setView('order')">
                 <div class="glyphicon glyphicon-list"></div>
             </li>
             <li class="nav-list-item" ng-click="appstate.setView('table-selection')">
@@ -59,19 +59,19 @@ initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- SERVICE WORKER -->
     // <script>
-    // if ('serviceWorker' in navigator) {
-    //     navigator.serviceWorker.register('/sw.js', {
-    //             scope: '/'
-    //         })
-    //         .then(function(registration) {
-    //             console.log("Service Worker Registered");
-    //         });
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js', {
+                scope: '/'
+            })
+            .then(function(registration) {
+                console.log("Service Worker Registered");
+            });
 
-    //     navigator.serviceWorker.ready.then(function(registration) {
-    //         console.log("Service Worker Ready");
-    //     });
-    // }
-    // </script>
+        navigator.serviceWorker.ready.then(function(registration) {
+            console.log("Service Worker Ready");
+        });
+    }
+    </script>
 </body>
 
 </html>

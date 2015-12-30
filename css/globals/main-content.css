@@ -11,9 +11,9 @@
 }
 
 .list-group {
-    height: calc(100vh - 80px);
     padding: 10px 0 15px 10px;
     overflow-y: auto;
+    max-height: 100vh;
 }
 
 .list-group-item:first-child,
