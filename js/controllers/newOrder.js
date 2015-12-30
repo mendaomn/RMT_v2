@@ -19,8 +19,8 @@
         };
 
         // Handler
-       function confirmTables(currentOrder) {
-       		console.log("Confirming order", currentOrder);
+        function confirmTables(currentOrder) {
+            console.log("Confirming order", currentOrder);
             $scope.appstate.room = currentOrder.room;
             //$scope.appstate.table = currentOrder.tables;
             $scope.appstate.order = waiter.createOrder(currentOrder.tables);
@@ -30,7 +30,12 @@
         // Assign to $scope
         $scope.neworder = neworder;
         $scope.confirmTables = confirmTables;
-        
+
+        // Listeners
+        $scope.$watch('neworder.room', function(room) {
+            $scope.tables = restaurant.getTables(room);
+        });
+
         // Init
         $scope.rooms = restaurant.getRooms();
         $scope.neworder.room = $scope.rooms[0];
