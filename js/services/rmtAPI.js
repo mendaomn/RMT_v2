@@ -16,6 +16,9 @@
         return {
             sendOrder: function(order) {
                 return $http.post('/printOrder', order).then(success, fail);
+            },
+            sendInvoice: function(invoice){
+                return $http.post('/printInvoice', invoice).then(success, fail);    
             }
         };
     }]);

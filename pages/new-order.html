@@ -7,12 +7,12 @@
 	</h1>
     <ul class="nav nav-tabs">
         <li ng-repeat="room in rooms" ng-class="{active: neworder.room == room}" ng-click="neworder.room = room">
-            <a href="#">Room {{room.id}}</a>
+            <a href="#">{{room.name}}</a>
         </li>
     </ul>
     <ul class="list-group">
         <li ng-repeat="table in tables" ng-click="neworder.selectTable(table)" ng-class="{'selected': neworder.isSelected(table)}" class="list-group-item flex flex-align-center">
-            Table {{table.id}}
+            Tavolo {{table.id}}
         </li>
     </ul>
 </div>

@@ -2,12 +2,12 @@
 <div ng-controller="TablesCtrl">
     <ul class="nav nav-tabs">
         <li ng-repeat="room in rooms" ng-class="{active: appstate.room == room}" ng-click="selectRoom(room)">
-            <a href="#">Room {{room.id}}</a>
+            <a href="#">{{room.name}}</a>
         </li>
     </ul>
     <ul class="list-group">
         <li ng-repeat="table in tables | filter:{busy: true}" ng-click="selectTable(table)" class="list-group-item flex flex-align-center">
-            Table {{table.id}}
+            Tavolo {{table.id}}
         </li>
     </ul>
     <div ng-hide="activeOrdersCount()" class="tables-placeholder flex flex-center">

@@ -1,7 +1,7 @@
 <div class="flex flex-vertical stretch" ng-controller="OrderCtrl">
     <h1 class="flex flex-align-center">
         <span class="glyphicon glyphicon-list"></span>
-        <span class="flex1">Order!</span>
+        <span class="flex1">Ordine corrente</span>
         <!-- REMOVE button (becomes DONE button while removing) -->
         <span class="glyphicon glyphicon-trash" ng-click="removing = true" ng-hide="removing == true"></span>
         <span class="glyphicon glyphicon-ok" ng-click="removing = false" ng-show="removing == true"></span>
@@ -19,10 +19,10 @@
         <li class="list-group-item">
             <food-entry name="note.item.food.name" quantity="note.item.quantity" note="item.note" onplus="orderFood(item)" onminus="reduceFood(item)"></food-entry>
             <!-- SAVE NOTE button, overlays food's quantity -->
-            <div class="save-note flex flex-center" ng-click="note.visible = false; saveNote(note)">Save</div>
+            <div class="save-note flex flex-center" ng-click="note.visible = false; saveNote(note)">Salva</div>
         </li>
         <div class="note-container flex flex-center flex-vertical">
-            <span class="note__label">Take a note:</span>
+            <span class="note__label">Prendi una nota:</span>
             <textarea ng-value="note.text" ng-model="note.text"></textarea>
         </div>
     </ul>

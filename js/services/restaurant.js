@@ -14,6 +14,7 @@
             console.log(roomsArray);
             roomsArray.forEach(function(room, roomIndex) {
                 var obj = {
+                    name: room.name,
                     id: roomIndex,
                     tables: []
                 };

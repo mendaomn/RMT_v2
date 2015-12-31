@@ -47,6 +47,17 @@
                 };
                 console.log("Sending", payload);
                 rmtAPI.sendOrder(payload).then(function() {});
+            },
+            sendInvoice: function(order) {
+                var payload = {
+                    table: order.tablesArray.map(function(table) {
+                        return table.id;
+                    }).join(' + '),
+                    order: order.getContent(),
+                    total: order.getTotal()
+                };
+                console.log("Sending invoice", payload);
+                rmtAPI.sendInvoice(payload).then(function() {});
             }
         };
     }]);
