@@ -20,7 +20,8 @@
                 };
                 for (var i = 0; i < room.tables; i++) {
                     obj.tables.push({
-                        id: i
+                        id: room.prefix + i,
+                        roomid: roomIndex
                     });
                 }
                 rooms.push(obj);
