@@ -16,6 +16,7 @@
         $scope.orderFood = function(orderItem) {
             $scope.appstate.order.addFood({
                 food: orderItem.food,
+                menuType: orderItem.menuType,
                 quantity: 1,
                 note: orderItem.note
             });

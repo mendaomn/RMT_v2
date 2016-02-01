@@ -13,8 +13,6 @@
                 return foodNamesList.indexOf(food.name) != -1;
             }
 
-
-
             function getter(name) {
                 return function(obj) {
                     return obj[name];
@@ -40,6 +38,7 @@
                     if (!orderItem) {
                         content.push({
                             food: args.food,
+                            menuType: args.menuType,
                             quantity: args.quantity,
                             note: args.note || undefined
                         });
@@ -56,6 +55,7 @@
                             this.removeItem(item);
                         this.addFood({
                             food: item.food,
+                            menuType: item.menuType,
                             quantity: 1,
                             note: note
                         });

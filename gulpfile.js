@@ -14,7 +14,7 @@ var gulp = require('gulp'),
     minifyHTML = require('gulp-minify-html'),
     connect = require('gulp-connect'),
     watch = require('gulp-watch'),
-    del = require('del'),
+    //del = require('del'),
     runSequence = require('run-sequence'),
     ghPages = require('gulp-gh-pages');
 
@@ -119,7 +119,7 @@ gulp.task('copy', function() {
 
 // Clean output directory
 gulp.task('clean', function() {
-    return del('dist');
+  //  return del('dist');
 });
 
 // Deploy to gh-pages

@@ -3,7 +3,7 @@
 (function() {
     var app = angular.module('Sections', ['Services']);
     app.controller('SectionsCtrl', ['$scope', 'menu', function($scope, menu) {
-        menu.getSections().then(function(sections) {
+        menu.getSections( $scope.appstate.menuType ).then(function(sections) {
             $scope.sections = sections;
         });
 

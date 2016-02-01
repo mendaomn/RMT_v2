@@ -24,7 +24,7 @@
             $scope.appstate.room = currentOrder.room;
             //$scope.appstate.table = currentOrder.tables;
             $scope.appstate.order = waiter.createOrder(currentOrder.tables);
-            $scope.appstate.setView('sections');
+            $scope.appstate.setView('food-or-drinks');
         }
 
         // Assign to $scope
