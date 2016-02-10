@@ -1,0 +1,28 @@
+.rmt-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(51, 51, 51, 0.85);
+}
+
+.rmt-modal-dialog {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    border-top: 1px solid #e74c3c;
+	padding: 5px;
+    font-size: 1.4em;
+}
+
+.rmt-modal-footer {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.rmt-modal-footer .rmt-button{
+	font-size: 14px;
+}

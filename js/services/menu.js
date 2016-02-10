@@ -34,6 +34,8 @@
                                 currSection = line[ 0 ];
                                 menu[ currSection ] = [];
                             } else { // Line contains a food description
+                                if ( !line[ 0 ].trim() ) // Line is not empty
+                                    return;
                                 var food = {
                                     name: line[ 0 ],
                                     price: parseFloat( line[ 1 ].replace( /,/, '.' ) )

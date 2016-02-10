@@ -8,7 +8,7 @@
     </h1>
     <!-- ORDER ITEMS -->
     <ul ng-hide="note.visible" class="list-group flex1">
-        <li ng-repeat="item in orderContent" class="list-group-item">
+        <li ng-repeat="item in orderContent | orderBy:'menuType':true" class="list-group-item">
             <food-entry name="item.food.name" quantity="item.quantity" note="item.note" onnote="showNote(item)" onplus="orderFood(item)" onminus="reduceFood(item)"></food-entry>
             <!-- REMOVE FOOD button, overlays on top of the food's quantity -->
             <div ng-show="removing == true" class="food-remove flex flex-center" ng-click="removeFood(item)">X</div>
@@ -26,10 +26,24 @@
             <textarea ng-value="note.text" ng-model="note.text"></textarea>
         </div>
     </ul>
+    <!-- ACTIONS -->
     <div class="flex">
-        <button class="rmt-button flex1" ng-hide="note.visible" ng-click="sendToKitchen(appstate.order)">Invia</button>
-        <vr style="width: 1px"></vr>   
-        <button class="rmt-button flex1" ng-hide="note.visible" ng-click="sendInvoice(appstate.order)">Conto</button>
+        <button class="rmt-button flex1" ng-hide="note.visible" ng-click="sendToKitchen(appstate.order); sentToKitchen = true;">Invia</button>
+        <vr style="width: 1px"></vr>
+        <button class="rmt-button flex1" ng-hide="note.visible" ng-click="sendInvoice(appstate.order); sentInvoice = true;">Conto</button>
     </div>
+    <!-- FEEDBACK: ORDER -->
+    <rmt-modal ng-show="sentToKitchen" rmt-modal-title="'Comanda inviata!'" rmt-modal-onclose="appstate.setView('table-selection')">
+        Inviato in cucina e al bar.
+    </rmt-modal>
+    <!-- FEEDBACK: INVOICE -->
+    <rmt-modal ng-show="sentInvoice" rmt-modal-title="'Conto inviato!'" rmt-modal-onclose="appstate.setView('table-selection')">
+        Inviato alla cassa.
+        <ul class="">
+            <li ng-repeat="item in orderContent" class="">
+                {{item.quantity + 'x'}}, {{item.food.name}}, {{multiply(item.food.price, item.quantity) + '€'}}
+            </li>
+        </ul>
+        <p>Totale: {{total + '€'}}</p>
+    </rmt-modal>
 </div>
-

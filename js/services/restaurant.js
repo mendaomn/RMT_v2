@@ -21,7 +21,7 @@
                 for (var i = 0; i < room.tables; i++) {
                     obj.tables.push({
                         id: room.prefix + i,
-                        roomid: roomIndex
+                        roomid: room.name
                     });
                 }
                 rooms.push(obj);

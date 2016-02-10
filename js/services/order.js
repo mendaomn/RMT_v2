@@ -1,98 +1,99 @@
 // Order.js
 // mantains an order, adds food/drinks, compute totals, exposes the order
-(function() {
-    var app = angular.module('Order', []);
-    app.factory('orderGenerator', function() {
-        var Order = function(_tablesArray) {
+( function() {
+    var app = angular.module( 'Order', [] );
+    app.factory( 'orderGenerator', function() {
+        var Order = function( _tablesArray ) {
             var tablesArray = _tablesArray,
                 content = [];
 
-            function isFoodInOrder(food) {
-                var foodNamesList = content.map(getter("food")).map(getter("name"));
-                console.log(foodNamesList);
-                return foodNamesList.indexOf(food.name) != -1;
+            function isFoodInOrder( food ) {
+                var foodNamesList = content.map( getter( "food" ) ).map( getter( "name" ) );
+                console.log( foodNamesList );
+                return foodNamesList.indexOf( food.name ) != -1;
             }
 
-            function getter(name) {
-                return function(obj) {
-                    return obj[name];
+            function getter( name ) {
+                return function( obj ) {
+                    return obj[ name ];
                 };
             }
 
             return {
+                room: _tablesArray[0].roomid,
                 tablesArray: _tablesArray,
                 getContent: function() {
                     return content;
                 },
                 getTotal: function() {
-                    return content.reduce(function(cumulator, item) {
-                        cumulator += (item.quantity * item.food.price);
+                    return content.reduce( function( cumulator, item ) {
+                        cumulator += ( item.quantity * item.food.price );
                         return cumulator;
-                    }, 0);
+                    }, 0 );
                 },
                 getCount: function() {
                     return content.length;
                 },
-                addFood: function(args) { // args: food, quantity, note
-                    var orderItem = this.getItem(args);
-                    if (!orderItem) {
-                        content.push({
+                addFood: function( args ) { // args: food, quantity, note
+                    var orderItem = this.getItem( args );
+                    if ( !orderItem ) {
+                        content.push( {
                             food: args.food,
                             menuType: args.menuType,
                             quantity: args.quantity,
                             note: args.note || undefined
-                        });
+                        } );
                     } else {
                         orderItem.quantity += args.quantity;
                     }
                 },
-                addNote: function(item, note) {
-                    if (item.note && item.note != note) {
+                addNote: function( item, note ) {
+                    if ( item.note && item.note != note ) {
                         item.note = note;
-                    } else if (!item.note) {
-                        this.reduceQuantity(item);
-                        if (item.quantity === 0)
-                            this.removeItem(item);
-                        this.addFood({
+                    } else if ( !item.note ) {
+                        this.reduceQuantity( item );
+                        if ( item.quantity === 0 )
+                            this.removeItem( item );
+                        this.addFood( {
                             food: item.food,
                             menuType: item.menuType,
                             quantity: 1,
                             note: note
-                        });
+                        } );
                     }
 
                 },
-                reduceQuantity: function(item) {
-                    if (item.quantity !== 0) {
+                reduceQuantity: function( item ) {
+                    if ( item.quantity !== 0 ) {
                         item.quantity -= 1;
                     }
                 },
-                getItem: function(args) { // args: food, quantity, note
-                    var item = content.find(function(_item) {
-                        var sameFood = (_item.food.name == args.food.name);
-                        var sameNote = (_item.note == args.note);
-                        if (!args.note && !_item.note)
+                getItem: function( args ) { // args: food, quantity, note
+                    var item = content.find( function( _item ) {
+                        var sameFood = ( _item.food.name == args.food.name );
+                        var sameNote = ( _item.note == args.note );
+                        if ( !args.note && !_item.note )
                             return sameFood;
-                        else 
+                        else
                             return sameFood && sameNote;
-                    });
+                    } );
                     return item;
                 },
-                removeItem: function(item) {
-                    content.splice(content.indexOf(item), 1);
+                removeItem: function( item ) {
+                    content.splice( content.indexOf( item ), 1 );
                 },
-                getQuantity: function(food) {
-                    var _item = this.getItem({
+                getQuantity: function( food ) {
+                    var _item = this.getItem( {
                         food: food
-                    });
-                    return (_item) ? _item.quantity : 0;
+                    } );
+                    return ( _item ) ? _item.quantity : 0;
                 }
             };
         };
         return {
-            createOrder: function(tablesArray) {
-                return new Order(tablesArray);
+            createOrder: function( tablesArray ) {
+                return new Order( tablesArray );
             }
         };
-    });
-})();
+    } );
+} )();

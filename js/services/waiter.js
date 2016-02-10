@@ -40,6 +40,7 @@
             },
             sendOrder: function(order) {
                 var payload = {
+                    room: order.room,
                     table: order.tablesArray.map(function(table) {
                         return table.id;
                     }).join(' + '),
@@ -50,6 +51,7 @@
             },
             sendInvoice: function(order) {
                 var payload = {
+                    room: order.room,
                     table: order.tablesArray.map(function(table) {
                         return table.id;
                     }).join(' + '),

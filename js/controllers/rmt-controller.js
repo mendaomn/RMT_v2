@@ -47,7 +47,7 @@
         $scope.selectTable = function(table) {
             $scope.appstate.table = table;
             $scope.appstate.order = waiter.getOrder(table);
-            $scope.appstate.setView('sections');
+            $scope.appstate.setView('food-or-drinks');
         };
 
         $scope.activeOrdersCount = function() {

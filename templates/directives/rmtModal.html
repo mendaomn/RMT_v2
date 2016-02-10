@@ -1,0 +1,22 @@
+<div class="rmt-modal">
+	<div class="rmt-modal-dialog">
+		<div class="rmt-modal-content">
+			<div class="rmt-modal-header">
+				<button class="close">
+					<span>&times;</span>
+				</button>
+				<h4 class="rmt-modal-title">
+					{{rmtModalTitle}}
+				</h4>
+			</div>
+			<div class="rmt-modal-body">
+				<ng-transclude>
+					<!-- TRANSCLUSION HERE -->
+				</ng-transclude>
+			</div>
+			<div class="rmt-modal-footer">
+				<button class="rmt-button" ng-click="rmtModalOnclose()">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
