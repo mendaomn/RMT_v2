@@ -19,6 +19,10 @@
     flex: 1;
 }
 
+.flex-child-right{
+	margin-left: auto;
+}
+
 .stretch{
 	height: 100vh;
 }

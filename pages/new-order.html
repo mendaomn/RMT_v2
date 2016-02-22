@@ -13,6 +13,7 @@
     <ul class="list-group">
         <li ng-repeat="table in tables" ng-click="neworder.selectTable(table)" ng-class="{'selected': neworder.isSelected(table)}" class="list-group-item flex flex-align-center">
             Tavolo {{table.id}}
+            <span ng-show="{{table.busy}}" class="badge flex-child-right">Occupato</span>
         </li>
     </ul>
 </div>
