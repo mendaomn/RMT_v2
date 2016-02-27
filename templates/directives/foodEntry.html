@@ -3,7 +3,7 @@
     <div class="food-entry__frontside flex" ng-click="clicked()" ng-hide="showMiddleStep || showQuantity">
         <div class="food-entry__info">
             <span class="food-entry__name">{{name | lowercase}}</span>
-            <span class="food-entry__note">{{note | lowercase | limitTo:10}}</span>
+            <span class="food-entry__note">{{note | lowercase}}</span>
         </div>
         <span class="food-entry__quantity flex flex-center" ng-show="quantity">{{quantity}}</span>
     </div>
