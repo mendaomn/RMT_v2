@@ -12,3 +12,12 @@
     background-color: white;
     color: #333;
 }
+
+.rmt-button--spaced:not(:last-child) {
+    margin-right: 1px;
+}
+
+.rmt-button.selected {
+    background-color: rgba(231, 76, 60, 0.4);
+    color: #333;
+}

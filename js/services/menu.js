@@ -4,13 +4,15 @@
     var app = angular.module( 'Menu', [] );
     app.factory( 'menu', [ '$http', function( $http ) {
         var MENU_FOOD_FILENAME = '/assets/menu/menu_cibo.csv',
-            MENU_DRINKS_FILENAME = '/assets/menu/menu_bere.csv';
+            MENU_DRINKS_FILENAME = '/assets/menu/menu_bere.csv',
+            QUICK_NOTES_FILENAME = '/assets/menu/note.json';
 
         var menu_food = {},
             menu_drink = {},
             hasParsed,
             foodLoaded = loadFromFile( MENU_FOOD_FILENAME ),
-            drinksLoaded = loadFromFile( MENU_DRINKS_FILENAME );
+            drinksLoaded = loadFromFile( MENU_DRINKS_FILENAME ),
+            quickNotesReady = loadQuickNotes( QUICK_NOTES_FILENAME );
 
         function loadFromFile( file ) {
             var that = this;
@@ -52,6 +54,12 @@
 
         }
 
+        function loadQuickNotes( filename ) {
+            return $http.get( filename ).then( function( data ) {
+                return data.data.quickNotes;
+            } );
+        }
+
         function combineMenus( menus ) {
             return {
                 foodMenu: menus[ 0 ],
@@ -75,6 +83,17 @@
             getFoodList: function( menuType, sectionName ) {
                 return hasParsed.then( function( menu ) {
                     return menu[ menuType ][ sectionName ];
+                } );
+            },
+            getQuickNotes: function( sectionName ) {
+                return quickNotesReady.then( function( quickNotes ) {
+                    var sectionNameUpperCase = sectionName.toUpperCase();
+                    var notes;
+                    notes = quickNotes
+                        .find( function( item ) {
+                            return item.section.toUpperCase() == sectionNameUpperCase;
+                        } );
+                    return notes ? notes.notes : [];
                 } );
             }
         };

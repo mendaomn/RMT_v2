@@ -1,7 +1,16 @@
 <h1><span class="glyphicon glyphicon-user"></span>Menu</h1>
-<ul class="list-group" ng-controller="FoodCtrl">
-    <li ng-repeat="food in foodList | orderBy: 'name'" class="list-group-item">
-        <food-entry name="food.name" quantity="appstate.order.getQuantity(food)" onplus="orderFood(food)" onminus="reduceFood(food)"></food-entry>
-    </li>
-</ul>
-<!-- ng-click="orderFood(food)" -->
+<div ng-controller="FoodCtrl">
+	<ul class="list-group">
+		<li ng-repeat="food in foodList | orderBy: 'name'" class="list-group-item">
+			<food-entry ng-click="showModal( food )" name="food.name" quantity="appstate.order.getQuantity(food)" onplus="orderFood(food)" onminus="reduceFood(food)"></food-entry>
+		</li>
+	</ul>
+	<!-- FEEDBACK: ADDED TO ORDER -->
+	<rmt-modal ng-show="modal.visible && quickNotes.length" rmt-modal-title="'Aggiunto ' + modal.data.food.name" rmt-modal-onclose="hideModal()">
+		Seleziona note rapide: {{modal.data.notes}}
+		<ul class="flex list-reset">
+			<li ng-repeat="quickNote in quickNotes" ng-class="{'selected': quickNote.selected}" class="flex1 rmt-button rmt-button--spaced" ng-click="quickNote.selected = !quickNote.selected">{{quickNote.text}}</li>
+		</ul>
+	</rmt-modal>
+	<!-- ng-click="orderFood(food)" -->
+</div>

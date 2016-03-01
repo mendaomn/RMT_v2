@@ -20,7 +20,8 @@
             }
 
             return {
-                room: _tablesArray[0].roomid,
+                date: new Date().toLocaleString(),
+                room: _tablesArray[ 0 ].roomid,
                 tablesArray: _tablesArray,
                 getContent: function() {
                     return content;
@@ -81,6 +82,12 @@
                 },
                 removeItem: function( item ) {
                     content.splice( content.indexOf( item ), 1 );
+                },
+                setSent: function( item ) {
+                    item.sent = true;
+                },
+                toBeSent: function( item ) {
+                    return !item.sent;
                 },
                 getQuantity: function( food ) {
                     var _item = this.getItem( {
