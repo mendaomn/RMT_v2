@@ -20,7 +20,7 @@
             }
 
             return {
-                date: new Date().toLocaleString(),
+                date: new Date().toISOString(),
                 room: _tablesArray[ 0 ].roomid,
                 tablesArray: _tablesArray,
                 getContent: function() {
