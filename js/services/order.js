@@ -1,15 +1,13 @@
 // Order.js
 // mantains an order, adds food/drinks, compute totals, exposes the order
-( function() {
-    var app = angular.module( 'Order', [] );
-    app.factory( 'orderGenerator', function() {
+(function() {
+    var app = angular.module( "Order", []);
+    app.factory( "orderGenerator", function() {
         var Order = function( _tablesArray ) {
-            var tablesArray = _tablesArray,
-                content = [];
+            var tablesArray = _tablesArray;
 
             function isFoodInOrder( food ) {
-                var foodNamesList = content.map( getter( "food" ) ).map( getter( "name" ) );
-                console.log( foodNamesList );
+                var foodNamesList = this.content.map( getter( "food" ) ).map( getter( "name" ) );
                 return foodNamesList.indexOf( food.name ) != -1;
             }
 
@@ -23,27 +21,29 @@
                 date: new Date().toISOString(),
                 room: _tablesArray[ 0 ].roomid,
                 tablesArray: _tablesArray,
+                content: [],
                 getContent: function() {
-                    return content;
+                    return this.content;
                 },
                 getTotal: function() {
-                    return content.reduce( function( cumulator, item ) {
+                    return this.content.reduce(function( cumulator, item ) {
                         cumulator += ( item.quantity * item.food.price );
                         return cumulator;
                     }, 0 );
                 },
                 getCount: function() {
-                    return content.length;
+                    return this.content.length;
                 },
-                addFood: function( args ) { // args: food, quantity, note
+                addFood: function( args ) {
+                    // args: food, quantity, note
                     var orderItem = this.getItem( args );
                     if ( !orderItem ) {
-                        content.push( {
+                        this.content.push({
                             food: args.food,
                             menuType: args.menuType,
                             quantity: args.quantity,
                             note: args.note || undefined
-                        } );
+                        });
                     } else {
                         orderItem.quantity += args.quantity;
                     }
@@ -53,14 +53,15 @@
                         item.note = note;
                     } else if ( !item.note ) {
                         this.reduceQuantity( item );
-                        if ( item.quantity === 0 )
+                        if ( item.quantity === 0 ) {
                             this.removeItem( item );
-                        this.addFood( {
+                          }
+                        this.addFood({
                             food: item.food,
                             menuType: item.menuType,
                             quantity: 1,
                             note: note
-                        } );
+                        });
                     }
 
                 },
@@ -69,19 +70,21 @@
                         item.quantity -= 1;
                     }
                 },
-                getItem: function( args ) { // args: food, quantity, note
-                    var item = content.find( function( _item ) {
+                getItem: function( args ) {
+                    // args: food, quantity, note
+                    var item = this.content.find(function( _item ) {
                         var sameFood = ( _item.food.name == args.food.name );
                         var sameNote = ( _item.note == args.note );
-                        if ( !args.note && !_item.note )
+                        if ( !args.note && !_item.note ) {
                             return sameFood;
-                        else
-                            return sameFood && sameNote;
-                    } );
+                          }
+
+                        return sameFood && sameNote;
+                    });
                     return item;
                 },
                 removeItem: function( item ) {
-                    content.splice( content.indexOf( item ), 1 );
+                    this.content.splice( this.content.indexOf( item ), 1 );
                 },
                 setSent: function( item ) {
                     item.sent = true;
@@ -90,9 +93,9 @@
                     return !item.sent;
                 },
                 getQuantity: function( food ) {
-                    var _item = this.getItem( {
+                    var _item = this.getItem({
                         food: food
-                    } );
+                    });
                     return ( _item ) ? _item.quantity : 0;
                 }
             };
@@ -102,5 +105,5 @@
                 return new Order( tablesArray );
             }
         };
-    } );
-} )();
+    });
+})();
