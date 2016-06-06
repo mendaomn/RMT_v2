@@ -1,0 +1,26 @@
+body[ng-app="StatsApp"] {
+  background-color: #eef2f3;
+  padding-bottom: 15px;
+}
+.stat {
+  overflow: auto;
+  background-color: #fff;
+  padding: 0 20px 5px 15px;
+  margin-top: 15px;
+  box-shadow: 0 4px 8px black;
+}
+.stat .list-group {
+  max-height: none;
+}
+.stat .statTitle {
+  font-size: 2.5rem;
+}
+.stat .statValue {
+  text-align: center;
+  color: darkcyan;
+  font-size: 6rem;
+}
+.stat ul li .statValue {
+  font-size: 3rem;
+  font-weight: bold;
+}

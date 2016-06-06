@@ -1,26 +1,26 @@
 // foodEntry.js
 // component showing food name and quantity, allowing quantity to be modified
 
-( function() {
-    var app = angular.module( 'FoodEntry', [] );
-    app.directive( 'foodEntry', function() {
+(function() {
+    var app = angular.module( "FoodEntry", []);
+    app.directive( "foodEntry", function() {
         return {
-            restrict: 'E',
+            restrict: "E",
             transclude: true,
             scope: {
-                name: '=',
-                quantity: '=',
-                note: '=',
-                onplus: '&',
-                onminus: '&',
-                onnote: '&?'
+                name: "=",
+                quantity: "=",
+                note: "=",
+                onplus: "&",
+                onminus: "&",
+                onnote: "&?"
             },
-            templateUrl: 'directives/foodEntry.html',
+            templateUrl: "directives/foodEntry.html",
             link: function( scope, elem, attrs ) {
-                scope.$watch( 'showQuantity', function( val ) {
+                scope.$watch( "showQuantity", function( val ) {
                     if ( val && !scope.quantity )
                         scope.onplus();
-                } );
+                });
 
                 scope.clicked = function() {
                     if ( scope.onnote )
@@ -31,5 +31,5 @@
 
             }
         };
-    } );
-} )();
+    });
+})();
