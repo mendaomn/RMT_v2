@@ -8,10 +8,10 @@
     font-size: 18px;
 }
 
-.rmt-button:hover {
+/*.rmt-button:hover {
     background-color: white;
     color: #333;
-}
+}*/
 
 .rmt-button--spaced:not(:last-child) {
     margin-right: 1px;
